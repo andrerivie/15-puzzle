@@ -1,0 +1,13 @@
+.block-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  position: relative;
+  background: lightblue;
+  width: 400px;
+  height: 400px
+}
+
+.block-item {
+  transition: transform 0.5s linear;
+  border: 1px solid black;
+}
