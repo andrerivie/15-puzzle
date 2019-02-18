@@ -1,20 +1,22 @@
-// global space variable is initialized to 16 and changes with valid click
+// space variable is initialized to 16 and changes with valid click
 let space = 16
 
+// grab a block after the board has been generated
 const testBlock = document.getElementById('1')
 const blockWidth = testBlock.style.width
-const blockSide = Number(blockWidth.slice(0, -2))
+// slice off 'px', +2 for border lines
+const lengthToMove = Number(blockWidth.slice(0, -2)) + 2
 
-// helper object used for style.transform and html id reassignment once a move
+// reference object used for style.transform and html id reassignment once a move
 // direction has been determined
 const move = {
-  right: [blockSide, 0],
+  right: [lengthToMove, 0],
   rightAdjust: 1,
-  left: [(-blockSide), 0],
+  left: [(-lengthToMove), 0],
   leftAdjust: -1,
-  down: [0, blockSide],
+  down: [0, lengthToMove],
   downAdjust: 4,
-  up: [0, (-blockSide)],
+  up: [0, (-lengthToMove)],
   upAdjust: -4
 }
 
@@ -24,32 +26,29 @@ document.addEventListener('click', (evt) => {
   if (!blockClicked.className && blockClicked.parentElement) {
     blockClicked = blockClicked.parentElement
   }
-  // uses helper function to get all possible move options (explained below)
+  // gets all possible move options as options[left], options[up], etc
   const options = getOptions(blockClicked.id)
-  let directionToMove = ''
+  let directionToMove
   for (direction in options) {
-    // determine which direction the space is in based on move options
+    // determine in which direction the space is
     if (options[direction].includes(space)) {
       directionToMove = direction
     }
   }
-  // if directionToMove is truthy, there's a move to be made
+  // if directionToMove is truthy there's a move to be made
   // otherwise, just console.log('invalid move')
   if (directionToMove) {
-    // get array of blocks we need to move based on determined direction
+    // get array of blocks towards directionToMove
     let blocksToMove = options[directionToMove]
-    // different rules for right/down and left/up due to order requirements
+    // different rules for right/down and left/up
     if (directionToMove === 'right' || directionToMove === 'down') {
       blocksToMove.reverse().push(parseInt(blockClicked.id))
-      blocksToMove.shift()
-      // remove options we don't want to move
-      blocksToMove = blocksToMove.filter(ele => ele < space)
+      // filter out the space and anything past the space
+      blocksToMove = blocksToMove.filter(blockId => blockId < space)
     } else {
-      // add clicked block id to beginning of array then pop off ending
+      // add clicked block id to beginning of array
       blocksToMove.unshift(parseInt(blockClicked.id))
-      blocksToMove.pop()
-      // remove options we don't want to move
-      blocksToMove = blocksToMove.filter(ele => ele > space)
+      blocksToMove = blocksToMove.filter(blockId => blockId > space)
       blocksToMove = blocksToMove.sort((a,b) => a-b)
     }
     // set the new space variable to what was clicked

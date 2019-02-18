@@ -8,15 +8,17 @@
 .block-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  background: lightblue;
+  background: rgb(207, 235, 245);
+  outline: 1px black solid;
 }
 
 .block-item {
   display: flex;
   text-align: center;
   align-items: center;
+  background: lightblue;
   transition: transform 0.5s linear;
-  outline: 1px black solid;
+  border: 1px black solid;
   transform: translate(0px, 0px);
 }
 
