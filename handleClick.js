@@ -1,20 +1,26 @@
 // global space variable is initialized to 16 and changes with valid click
 let space = 16
 
+const testBlock = document.getElementById('1')
+const blockWidth = testBlock.style.width
+const blockSide = Number(blockWidth.slice(0, -2)) + 2
+console.log(blockSide)
+
 // helper object used for style.transform and html id reassignment once a move
 // direction has been determined
 const move = {
-  right: [100, 0],
+  right: [blockSide, 0],
   rightAdjust: 1,
-  left: [-100, 0],
+  left: [-blockSide, 0],
   leftAdjust: -1,
-  down: [0, 100],
+  down: [0, blockSide],
   downAdjust: 4,
-  up: [0, -100],
+  up: [0, -blockSide],
   upAdjust: -4
 }
 
 document.addEventListener('click', (evt) => {
+  console.log(w,h)
   let blockClicked = evt.target
   // adjust blockClicked to parent if text is clicked
   if (!blockClicked.className && blockClicked.parentElement) {
@@ -102,11 +108,14 @@ const getOptions = (id) => {
 const setCurrentTranslate = (currentRule, xyArray) => {
   if (currentRule) {
     // regex will return array of current [x,y] translate values
-    let coords = currentRule.match(/[-\d]+/g)
+    let coords = currentRule.match(/[-.\d]+/g)
     // add current values to xyArray (determined by move[right], move[up], etc)
-    return `translate(${parseInt(coords[0]) + parseInt(xyArray[0])}px, ${parseInt(coords[1]) + parseInt(xyArray[1])}px)`
+    console.log(`${Number(coords[0])} + ${Number(xyArray[0])}px, ${Number(coords[1])} + ${Number(xyArray[1])}px)`)
+    return `translate(${Number(coords[0]) + Number(xyArray[0])}px, ${Number(coords[1]) + Number(xyArray[1])}px)`
   } else {
     // if no current translate values, just set them
+    console.log(`translate(${xyArray[0]}px, ${xyArray[1]}px)`)
     return `translate(${xyArray[0]}px, ${xyArray[1]}px)`
   }
 }
+

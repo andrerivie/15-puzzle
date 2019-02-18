@@ -1,18 +1,25 @@
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3vh;
+}
+
 .block-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  position: relative;
+  /* position: relative; */
   background: lightblue;
-  width: 400px;
-  height: 400px
+  /* width: 728px;
+  height: 728px; */
 }
 
 .block-item {
   display: flex;
   text-align: center;
   transition: transform 0.5s linear;
-  height: 98px;
-  width: 98px;
+  /* height: 180px;
+  width: 180px; */
   border: 1px solid black;
   transform: translate(0px, 0px);
 }
@@ -20,3 +27,4 @@
 .block-item h1 {
   flex: 1;
 }
+
