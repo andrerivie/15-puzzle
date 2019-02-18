@@ -8,19 +8,15 @@
 .block-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  /* position: relative; */
   background: lightblue;
-  /* width: 728px;
-  height: 728px; */
 }
 
 .block-item {
   display: flex;
   text-align: center;
+  align-items: center;
   transition: transform 0.5s linear;
-  /* height: 180px;
-  width: 180px; */
-  border: 1px solid black;
+  outline: 1px black solid;
   transform: translate(0px, 0px);
 }
 

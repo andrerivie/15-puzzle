@@ -1,26 +1,28 @@
-let w=window.innerWidth
-let h=window.innerHeight
-
-let numberArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-
-// shuffle method defined below
-shuffleArray(numberArray)
-
-let gameHeight, gameWidth
-console.log(w, h)
-if (w<750) {
-  gameWidth = parseInt(w*.9)
-  gameHeight = gameWidth
-} else {
-  gameHeight = parseInt(h*.9)
-  gameWidth = gameHeight
-}
-
+let windowWidth=window.innerWidth,
+    windowHeight=window.innerHeight,
+    numberArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+    gameWidth = parseInt(windowWidth*.9)
+    gameHeight = parseInt(windowHeight*.9)
 
 const blockContainer = document.getElementById("app")
+// make a square depending on screen size
+if (windowWidth<750) {
+  // ensure width is divisible by 4 for integer lengths everywhere
+  while (gameWidth%4 !== 0) {
+    gameWidth--
+  }
+  gameHeight = gameWidth
+} else {
+  while (gameHeight%4 !== 0) {
+    gameHeight--
+  }
+  gameWidth = gameHeight
+}
+// set width and height for entire game board
 blockContainer.setAttribute('style', `width: ${gameWidth}px; height: ${gameHeight}px;`)
 
-console.log('W:', w, 'H:', h)
+// shuffle function defined below
+shuffleArray(numberArray)
 
 // create the starting board html elements
 for (i = 0; i <= 14; i++) {
@@ -32,9 +34,9 @@ for (i = 0; i <= 14; i++) {
   const blockNumberText = document.createTextNode(`${numberArray[i]}`)
   blockNumber.appendChild(blockNumberText)
   block.appendChild(blockNumber)
-  block.setAttribute('style', `width: ${(gameWidth/4)-2}px; height: ${(gameHeight/4)-2}px;`)
+  // set width and height for each board element
+  block.setAttribute('style', `width: ${(gameWidth/4)}px; height: ${(gameHeight/4)}px;`)
   blockContainer.appendChild(block)
-
 }
 
 // nice ES6 durstenfield shuffle implementation copied from stackoverflow
