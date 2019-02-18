@@ -8,7 +8,15 @@
 }
 
 .block-item {
+  display: flex;
+  text-align: center;
   transition: transform 0.5s linear;
+  height: 98px;
+  width: 98px;
   border: 1px solid black;
   transform: translate(0px, 0px);
+}
+
+.block-item h1 {
+  flex: 1;
 }
