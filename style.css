@@ -10,4 +10,5 @@
 .block-item {
   transition: transform 0.5s linear;
   border: 1px solid black;
+  transform: translate(0px, 0px);
 }
